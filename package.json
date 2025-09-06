@@ -1,0 +1,32 @@
+{
+  "name": "@impulse/embeds-monorepo",
+  "version": "1.0.0",
+  "description": "Impulse CRM embed packages for booking and forms",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces",
+    "test": "npm run test --workspaces",
+    "clean": "npm run clean --workspaces",
+    "publish:all": "npm publish --workspaces"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.6",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "embed",
+    "booking",
+    "forms",
+    "crm",
+    "impulse"
+  ],
+  "author": "Impulse CRM",
+  "license": "MIT"
+}

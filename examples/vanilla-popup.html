@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impulse Embed - Vanilla JS Popup Example</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .demo-section {
+      margin: 40px 0;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      margin: 8px;
+      background: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background: #2563eb;
+    }
+
+    .btn-secondary {
+      background: #6b7280;
+    }
+
+    .btn-secondary:hover {
+      background: #4b5563;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Impulse Embed - Vanilla JS Popup Examples</h1>
+
+  <div class="demo-section">
+    <h2>Method 1: Button Triggers</h2>
+    <p>Click these buttons to open booking/form popups:</p>
+
+    <button id="booking-btn" class="btn">Book Appointment</button>
+    <button id="contact-btn" class="btn btn-secondary">Contact Form</button>
+    <a href="#" id="custom-link" class="btn">Custom Link Trigger</a>
+  </div>
+
+  <div class="demo-section">
+    <h2>Method 2: Auto-initialization with Script Tag</h2>
+    <p>This button is automatically initialized from script data attributes:</p>
+
+    <button id="auto-trigger" class="btn">Auto-initialized Popup</button>
+    <script src="../packages/vanilla/dist/index.js" data-impulse-url="https://your-crm.com/forms/contact"
+      data-impulse-mode="popup" data-impulse-trigger="#auto-trigger" data-impulse-width="800px"
+      data-impulse-height="600px"></script>
+  </div>
+
+  <div class="demo-section">
+    <h2>Method 3: Multiple Embeds</h2>
+    <p>You can have multiple embeds on the same page:</p>
+
+    <button id="embed-a" class="btn">Service A</button>
+    <button id="embed-b" class="btn">Service B</button>
+    <button id="embed-c" class="btn">Service C</button>
+  </div>
+
+  <script src="../packages/vanilla/dist/index.js"></script>
+  <script>
+    // method 1: individual button setup
+    const bookingEmbed = new ImpulseEmbed({
+      url: 'https://your-crm.com/booking/appointment',
+      mode: 'popup',
+      trigger: '#booking-btn',
+      width: '900px',
+      height: '700px',
+      params: {
+        service: 'consultation',
+        source: 'website'
+      },
+      onLoad: () => console.log('Booking popup loaded'),
+      onClose: () => console.log('Booking popup closed'),
+      onSubmit: (data) => {
+        console.log('Booking submitted:', data);
+        alert('Appointment booked successfully!');
+      }
+    });
+
+    const contactEmbed = new ImpulseEmbed({
+      url: 'https://your-crm.com/forms/contact',
+      mode: 'popup',
+      trigger: '#contact-btn',
+      width: '600px',
+      height: '500px',
+      customCSS: 'border-radius: 16px;',
+      onSubmit: (data) => {
+        alert('Thank you for contacting us!');
+      }
+    });
+
+    const customLinkEmbed = new ImpulseEmbed({
+      url: 'https://your-crm.com/forms/demo',
+      mode: 'popup',
+      trigger: '#custom-link',
+    });
+
+    // method 3: multiple embeds with different configurations
+    const services = [
+      { id: '#embed-a', url: 'https://your-crm.com/booking/service-a', service: 'Service A' },
+      { id: '#embed-b', url: 'https://your-crm.com/booking/service-b', service: 'Service B' },
+      { id: '#embed-c', url: 'https://your-crm.com/booking/service-c', service: 'Service C' }
+    ];
+
+    services.forEach(({ id, url, service }) => {
+      new ImpulseEmbed({
+        url,
+        mode: 'popup',
+        trigger: id,
+        params: { service: service.toLowerCase().replace(' ', '-') },
+        onSubmit: (data) => {
+          alert(`${service} booking confirmed!`);
+        }
+      });
+    });
+
+    // example: dynamic embed creation
+    function createDynamicEmbed(serviceId) {
+      return new ImpulseEmbed({
+        url: `https://your-crm.com/booking/${serviceId}`,
+        mode: 'popup',
+        trigger: `#trigger-${serviceId}`,
+        params: {
+          source: 'dynamic',
+          timestamp: Date.now().toString()
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
