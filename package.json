@@ -28,5 +28,8 @@
     "impulse"
   ],
   "author": "Impulse CRM",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@impulse/embed-react": "1.0.0"
+  }
 }
