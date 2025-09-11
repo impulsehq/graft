@@ -76,5 +76,11 @@ export const useImpulseEmbed = (
     open,
     close,
     reload,
+    destroyEmbed: useCallback(() => {
+      if (embedRef.current) {
+        embedRef.current.destroy();
+        embedRef.current = null; // Clear the ref after destroying
+      }
+    }, []),
   }
 }

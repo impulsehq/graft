@@ -17,7 +17,12 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@impulse/embed-js": ["packages/vanilla/src"],
+      "@impulse/embed-react": ["packages/react/src"]
+    }
   },
   "include": ["packages/*/src/**/*"],
   "exclude": ["node_modules", "dist"]
