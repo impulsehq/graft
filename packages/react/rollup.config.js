@@ -1,6 +1,8 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
+import babel from "@rollup/plugin-babel";
+import { DEFAULT_EXTENSIONS } from "@babel/core";
 
 export default [
   {
@@ -17,14 +19,26 @@ export default [
         file: "dist/index.esm.js",
         format: "es",
         sourcemap: true,
-        exports: "named",
       },
     ],
     plugins: [
-      resolve(),
+      resolve({
+        browser: true,
+        preferBuiltins: false,
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      }),
       commonjs(),
       typescript({
-        project: "./tsconfig.json", // Point to the local tsconfig.json
+        tsconfig: "./tsconfig.build.json", // Use build-specific config
+        declaration: true,
+        declarationDir: "dist",
+        include: ["src/**/*"],
+        exclude: ["node_modules", "dist", "../**/*"],
+      }),
+      babel({
+        extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"],
+        babelHelpers: "bundled",
+        presets: ["@babel/preset-typescript", "@babel/preset-react"],
       }),
     ],
   },
