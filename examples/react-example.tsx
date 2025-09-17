@@ -17,6 +17,7 @@ export const UniversalEmbedExample: React.FC = () => {
         <h3 className="text-lg font-semibold mb-4">Inline Embed</h3>
         <ImpulseEmbed
           url="https://your-crm.com/booking/abc123"
+          mode="inline"
           height="600px"
           params={{ theme: 'light', source: 'react-app' }}
           onLoad={() => console.log('Inline embed loaded')}
@@ -31,6 +32,7 @@ export const UniversalEmbedExample: React.FC = () => {
         <ImpulseEmbed
           url="https://your-crm.com/forms/contact"
           width="800px"
+          mode='inline'
           height="600px"
           onSubmit={(data) => alert('Thank you for your submission!')}
           className="btn btn-primary"
