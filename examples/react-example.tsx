@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { 
-  ImpulseEmbed, 
-  ImpulseInlineEmbed, 
+import React, { useState, useEffect } from 'react';
+import {
+  ImpulseEmbed,
+  ImpulseInlineEmbed,
   ImpulsePopupEmbed,
-  useImpulseEmbed 
+  useImpulseEmbed
 } from '@impulse/embed-react';
 
 // example 1: universal component (auto-detects mode)
@@ -11,18 +11,18 @@ export const UniversalEmbedExample: React.FC = () => {
   return (
     <div className="space-y-8">
       <h2 className="text-2xl font-bold">Universal Embed Component</h2>
-      
+
       {/* inline mode (no children) */}
       <div>
         <h3 className="text-lg font-semibold mb-4">Inline Embed</h3>
         <ImpulseEmbed
           url="https://your-crm.com/booking/abc123"
+          mode="inline"
           height="600px"
           params={{ theme: 'light', source: 'react-app' }}
           onLoad={() => console.log('Inline embed loaded')}
           onSubmit={(data) => console.log('Form submitted:', data)}
           className="border rounded-lg overflow-hidden"
-          mode="inline"
         />
       </div>
 
@@ -32,10 +32,10 @@ export const UniversalEmbedExample: React.FC = () => {
         <ImpulseEmbed
           url="https://your-crm.com/forms/contact"
           width="800px"
+          mode='inline'
           height="600px"
           onSubmit={(data) => alert('Thank you for your submission!')}
           className="btn btn-primary"
-          mode="popup"
         >
           Open Contact Form
         </ImpulseEmbed>
@@ -49,7 +49,7 @@ export const SpecificComponentsExample: React.FC = () => {
   return (
     <div className="space-y-8">
       <h2 className="text-2xl font-bold">Specific Components</h2>
-      
+
       {/* using specific inline component */}
       <div>
         <h3 className="text-lg font-semibold mb-4">Inline Component</h3>
@@ -57,8 +57,8 @@ export const SpecificComponentsExample: React.FC = () => {
           url="https://your-crm.com/booking/consultation"
           height="700px"
           params={{ service: 'consultation' }}
-          style={{ 
-            border: '2px solid #e5e7eb', 
+          style={{
+            border: '2px solid #e5e7eb',
             borderRadius: '12px',
             overflow: 'hidden'
           }}
@@ -70,7 +70,7 @@ export const SpecificComponentsExample: React.FC = () => {
         <ImpulsePopupEmbed
           url="https://your-crm.com/booking/demo"
           triggerAs="button"
-          triggerProps={{ 
+          triggerProps={{
             className: 'btn btn-blue',
             type: 'button'
           }}
@@ -81,7 +81,7 @@ export const SpecificComponentsExample: React.FC = () => {
         <ImpulsePopupEmbed
           url="https://your-crm.com/forms/quote"
           triggerAs="a"
-          triggerProps={{ 
+          triggerProps={{
             className: 'btn btn-outline',
             href: '#'
           }}
@@ -96,17 +96,17 @@ export const SpecificComponentsExample: React.FC = () => {
 // example 3: advanced usage with hooks
 export const AdvancedHookExample: React.FC = () => {
   const [selectedService, setSelectedService] = useState('');
-  
-  const { 
-    containerRef, 
-    embedInstance, 
-    createInlineEmbed, 
-    reload 
+
+  const {
+    containerRef,
+    embedInstance,
+    createInlineEmbed,
+    reload
   } = useImpulseEmbed({
     url: `https://your-crm.com/booking/${selectedService}`,
     mode: 'inline',
     height: '600px',
-    params: { 
+    params: {
       service: selectedService,
       customization: 'advanced'
     },
@@ -128,7 +128,7 @@ export const AdvancedHookExample: React.FC = () => {
   };
 
   // recreate embed when service changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (selectedService) {
       createInlineEmbed();
     }
@@ -137,7 +137,7 @@ export const AdvancedHookExample: React.FC = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Advanced Hook Usage</h2>
-      
+
       <div>
         <h3 className="text-lg font-semibold mb-4">Select a Service</h3>
         <div className="flex gap-2 mb-6">
@@ -164,8 +164,8 @@ export const AdvancedHookExample: React.FC = () => {
                 Reload Form
               </button>
             </div>
-            
-            <div 
+
+            <div
               ref={containerRef}
               className="border-2 border-gray-200 rounded-lg overflow-hidden"
             />
@@ -189,7 +189,7 @@ export const ImpulseEmbedApp: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-8">Impulse React Embed Examples</h1>
-      
+
       {/* tab navigation */}
       <div className="border-b border-gray-200 mb-8">
         <nav className="-mb-px flex space-x-8">
@@ -197,11 +197,10 @@ export const ImpulseEmbedApp: React.FC = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === tab.id
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === tab.id
+                ? 'border-blue-500 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
             >
               {tab.label}
             </button>

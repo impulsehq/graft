@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { ImpulseEmbed } from '@impulse/embed-js';
+import { useImpulseEmbed } from '../hooks/use-impulse-embed';
 import { ImpulsePopupEmbedProps } from '../types';
+
 
 export const ImpulsePopupEmbed: React.FC<ImpulsePopupEmbedProps> = ({
   children,
@@ -19,37 +20,27 @@ export const ImpulsePopupEmbed: React.FC<ImpulsePopupEmbedProps> = ({
   ...props
 }) => {
   const triggerRef = useRef<HTMLElement>(null);
-  const embedRef = useRef<InstanceType<typeof ImpulseEmbed> | null>(null);
+
+  const { embedInstance, createPopupEmbed, destroyEmbed } = useImpulseEmbed({
+    url,
+    mode: 'popup',
+    width,
+    height,
+    customCSS,
+    onLoad,
+    onClose,
+    onSubmit,
+    params,
+  });
 
   useEffect(() => {
     if (triggerRef.current) {
-      // Clean up existing embed
-      if (embedRef.current) {
-        embedRef.current.destroy();
-      }
-
-      // Create new embed
-      embedRef.current = new ImpulseEmbed({
-        url,
-        mode: 'popup',
-        trigger: triggerRef.current,
-        width,
-        height,
-        customCSS,
-        onLoad,
-        onClose,
-        onSubmit,
-        params,
-      });
+      createPopupEmbed();
     }
-
-    // Cleanup on unmount
     return () => {
-      if (embedRef.current) {
-        embedRef.current.destroy();
-      }
+      destroyEmbed();
     };
-  }, [url, width, height, customCSS, onLoad, onClose, onSubmit, params]);
+  }, [url, width, height, customCSS, onLoad, onClose, onSubmit, params, createPopupEmbed, destroyEmbed]);
 
   const handleClick = (event: React.MouseEvent) => {
     // Don't prevent default - let the vanilla JS embed handle it

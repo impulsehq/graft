@@ -18,6 +18,7 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
     "rollup": "^4.9.6",
+    "rollup-plugin-peer-deps-external": "2.2.4",
     "typescript": "^5.3.3"
   },
   "keywords": [
@@ -28,5 +29,11 @@
     "impulse"
   ],
   "author": "Impulse CRM",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@babel/preset-react": "7.27.1",
+    "@babel/preset-typescript": "7.27.1",
+    "@impulse/embed-react": "1.0.0",
+    "@rollup/plugin-babel": "6.0.4"
+  }
 }
