@@ -1,4 +1,4 @@
-# @impulse/embed-js
+# impulse-embed-js
 
 Vanilla JavaScript embed library for Impulse CRM booking and forms. No dependencies, works in any environment.
 
@@ -7,13 +7,13 @@ Vanilla JavaScript embed library for Impulse CRM booking and forms. No dependenc
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@impulse/embed-js@latest/dist/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/impulse-embed-js@latest/dist/index.js"></script>
 ```
 
 ### NPM
 
 ```bash
-npm install @impulse/embed-js
+npm install impulse-embed-js
 ```
 
 ## 📖 Usage
@@ -21,7 +21,7 @@ npm install @impulse/embed-js
 ### ES Modules
 
 ```javascript
-import { ImpulseEmbed, createEmbed } from '@impulse/embed-js'
+import { ImpulseEmbed, createEmbed } from 'impulse-embed-js'
 
 const embed = new ImpulseEmbed({
   url: 'https://your-crm.com/booking/abc123',
@@ -33,13 +33,13 @@ const embed = new ImpulseEmbed({
 ### CommonJS
 
 ```javascript
-const { ImpulseEmbed } = require('@impulse/embed-js')
+const { ImpulseEmbed } = require('impulse-embed-js')
 ```
 
 ### UMD (Browser Global)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@impulse/embed-js@latest/dist/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/impulse-embed-js@latest/dist/index.js"></script>
 <script>
   const embed = new ImpulseEmbed({
     /* config */
@@ -57,7 +57,7 @@ const { ImpulseEmbed } = require('@impulse/embed-js')
 <!-- Popup mode -->
 <button id="booking-btn">Book Now</button>
 <script
-  src="https://cdn.jsdelivr.net/npm/@impulse/embed-js@latest/dist/index.js"
+  src="https://cdn.jsdelivr.net/npm/impulse-embed-js@latest/dist/index.js"
   data-impulse-url="https://your-crm.com/booking/abc123"
   data-impulse-mode="popup"
   data-impulse-trigger="#booking-btn"
@@ -66,7 +66,7 @@ const { ImpulseEmbed } = require('@impulse/embed-js')
 <!-- Inline mode -->
 <div id="booking-container"></div>
 <script
-  src="https://cdn.jsdelivr.net/npm/@impulse/embed-js@latest/dist/index.js"
+  src="https://cdn.jsdelivr.net/npm/impulse-embed-js@latest/dist/index.js"
   data-impulse-url="https://your-crm.com/booking/abc123"
   data-impulse-mode="inline"
   data-impulse-container="#booking-container"
@@ -226,7 +226,7 @@ The library includes default styles that can be customized:
 Full TypeScript support included:
 
 ```typescript
-import { ImpulseEmbed, EmbedConfig, EmbedInstance } from '@impulse/embed-js'
+import { ImpulseEmbed, EmbedConfig, EmbedInstance } from 'impulse-embed-js'
 
 const config: EmbedConfig = {
   url: 'https://your-crm.com/booking/abc123',

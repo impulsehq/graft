@@ -1,6 +1,6 @@
 {
-  "name": "@impulse/embed-js",
-  "version": "1.0.0",
+  "name": "impulse-embed-js",
+  "version": "1.0.3",
   "description": "Vanilla JavaScript embed library for Impulse CRM booking and forms",
   "type": "module",
   "main": "dist/index.js",
@@ -39,5 +39,8 @@
   },
   "dependencies": {
     "tslib": "2.8.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
